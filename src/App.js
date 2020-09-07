@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import MembersPage from './components/features/Members/MembersPage/MembersPage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Tasks from './components/features/Tasks/Tasks';
+import MemberEditPage from './components/features/Members/MemberEditPage/MemberEditPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <header>Team Manager</header>
+      <div className='app-container'>
+        <Router>
+          <nav>
+            <a href='/tasks'>Tasks</a>
+            <a href='/members'>Team</a>
+          </nav>
+          <Switch>
+            <Route path='/tasks'>
+              <Tasks />
+            </Route>
+            <Route path='/members/edit/:id'>
+              <MemberEditPage />
+            </Route>
+            <Route path='/members'>
+              <MembersPage />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </>
   );
 }
 
