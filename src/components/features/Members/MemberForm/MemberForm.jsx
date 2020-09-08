@@ -14,6 +14,10 @@ const defaultValues = {
 
 const resolver = yupResolver(
   yup.object().shape({
+    id: yup
+      .number()
+      .transform((value) => (isNaN(value) ? null : value))
+      .nullable(),
     email: yup.string().email('Invalid format !').required('Required !'),
     name: yup.string().required('Required !'),
     gender: yup.string().required('Required !'),
@@ -21,18 +25,14 @@ const resolver = yupResolver(
   })
 );
 
-const MemberForm = ({ member = null, onSubmit, onCancel }) => {
+const MemberForm = ({ member = null, onSuccess, onCancel }) => {
   const { handleSubmit, register, errors } = useForm({
     defaultValues: member || defaultValues,
     resolver: resolver,
   });
 
-  const submit = (data) => {
-    onSubmit(data);
-  };
-
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit(onSuccess)}>
       <input type='hidden' name='id' ref={register} />
       <table>
         <tr>
@@ -57,22 +57,6 @@ const MemberForm = ({ member = null, onSubmit, onCancel }) => {
         </tr>
         <tr>
           <td>
-            <label>Gender</label>
-          </td>
-          <td>
-            {genders.map((gen) => (
-              <div key={gen.value}>
-                <input type='radio' name='gender' value={gen.value} ref={register} />
-                <label for={gen.value}>{gen.name}</label>
-              </div>
-            ))}
-          </td>
-          <td>
-            <div className='error'>{errors.gender && errors.gender.message}</div>
-          </td>
-        </tr>
-        <tr>
-          <td>
             <label>Role</label>
           </td>
           <td>
@@ -89,8 +73,24 @@ const MemberForm = ({ member = null, onSubmit, onCancel }) => {
             <div className='error'>{errors.role && errors.role.message}</div>
           </td>
         </tr>
+        <tr>
+          <td>
+            <label>Gender</label>
+          </td>
+          <td>
+            {genders.map((gen) => (
+              <div key={gen.value}>
+                <input type='radio' name='gender' value={gen.value} ref={register} />
+                <label for={gen.value}>{gen.name}</label>
+              </div>
+            ))}
+          </td>
+          <td>
+            <div className='error'>{errors.gender && errors.gender.message}</div>
+          </td>
+        </tr>
         <br></br>
-        <input type='submit' value='Ok' onClick={onSubmit} />
+        <input type='submit' value='Ok' />
         <input type='button' value='Cancel' onClick={onCancel} />
       </table>
     </form>

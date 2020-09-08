@@ -13,6 +13,7 @@ const MemberEditPage = () => {
   const handleEdit = (memberData) => {
     console.log(memberData);
     membersApi.updateMember(memberData);
+    history.push('/members');
   };
   const handleCancel = () => {
     history.push('/members');
@@ -21,7 +22,7 @@ const MemberEditPage = () => {
   return (
     <>
       <h2>Editing {member.name}</h2>
-      <MemberForm member={member} onSubmit={handleEdit} onCancel={handleCancel} />
+      <MemberForm member={member} onSuccess={handleEdit} onCancel={handleCancel} />
     </>
   );
 };

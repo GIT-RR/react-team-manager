@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './MembersPage.css';
 import MemberDisplayer from '../MemberDisplayer/MemberDisplayer';
 import { membersApi } from '../../../../shared/apis';
-// import AddMemberForm from './AddMemberForm/AddMemberForm';
+import { useHistory } from 'react-router-dom';
 
 const Members = () => {
+  const history = useHistory();
   const [selectedMember, setSelectedMember] = useState(null);
   const members = membersApi.getMembers();
 
@@ -12,11 +13,10 @@ const Members = () => {
     setSelectedMember(JSON.stringify(selectedMember) === JSON.stringify(member) ? null : member);
   };
 
-  const handleDeleteMember = () => {};
+  const handleAddMember = () => {
+    history.push('/members/add');
+  };
 
-  const handleAddMember = () => {};
-
-  const handleCancel = () => {};
   return (
     <>
       <h3>Team Members</h3>
@@ -35,9 +35,6 @@ const Members = () => {
         </div>
         <div className='member-column'>
           {selectedMember && <MemberDisplayer id={selectedMember.id} />}
-          {/* {!selectedMember && addMember && (
-            <AddMemberForm onSucess={handleAddMember} onCancel={handleCancel} />
-          )} */}
         </div>
       </div>
     </>

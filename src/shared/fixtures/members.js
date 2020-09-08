@@ -77,7 +77,7 @@ export const get = (id) => {
 };
 
 export const add = (member) => {
-  member.push({ ...member, id: member.length, isActive: true });
+  members.push({ ...member, id: members.length, isActive: true });
 };
 
 export const remove = (id) => {

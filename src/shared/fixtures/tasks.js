@@ -1,57 +1,59 @@
+import { statuses, roles } from './commons';
+
 let tasks = [
   {
     id: 0,
-    area: 'tl',
-    limitDate: new Date('09/09/2021'),
+    role: 'tl',
+    limitDate: new Date('09/11/2021'),
     description: 'Contract a new database developer',
     status: 1,
   },
   {
     id: 1,
-    area: 'dbd',
-    limitDate: new Date('09/09/2021'),
+    role: 'dbd',
+    limitDate: new Date('09/10/2021'),
     description: 'Re-structure user table',
     status: 1,
   },
   {
     id: 2,
-    area: 'fed',
+    role: 'fed',
     limitDate: new Date('09/09/2021'),
     description: 'Design new layout for the login page',
     status: 0,
   },
   {
     id: 3,
-    area: 'fed',
-    limitDate: new Date('09/09/2021'),
+    role: 'fed',
+    limitDate: new Date('09/08/2021'),
     description: 'Add validation to the login form',
     status: 0,
   },
 ];
 
-export const getAllTasks = () => {
-  return tasks;
+const taskMapper = (task) => {
+  return {
+    ...task,
+    statusDesc: statuses.find((s) => s.value === task.status)?.name || 'Undefined',
+    roleDesc: roles.find((r) => r.value === task.role)?.name || 'No role',
+  };
 };
 
-export const addUpdateTask = (task) => {
-  if (task.id) {
-    const index = tasks.findIndex(function (o) {
-      return o.id === task.id;
-    });
+export const getAll = () => {
+  return tasks.map((t) => taskMapper(t));
+};
 
-    tasks.splice(index, 1);
-  }
-
+export const add = (task) => {
   tasks.push({
     ...task,
-    id: task.id || tasks.length,
+    id: tasks.length,
   });
 };
 
-export const deleteTask = (planId) => {
-  const index = tasks.findIndex(function (o) {
-    return o.id === planId;
-  });
+// export const deleteTask = (planId) => {
+//   const index = tasks.findIndex(function (o) {
+//     return o.id === planId;
+//   });
 
-  tasks.splice(index, 1);
-};
+//   tasks.splice(index, 1);
+// };

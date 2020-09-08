@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import MembersPage from './components/features/Members/MembersPage/MembersPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Tasks from './components/features/Tasks/Tasks';
 import MemberEditPage from './components/features/Members/MemberEditPage/MemberEditPage';
+import MemberAddPage from './components/features/Members/MemberAddPage/MemberAddPage';
+import TasksPage from './components/features/Tasks/TasksPage/TasksPage';
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
           </nav>
           <Switch>
             <Route path='/tasks'>
-              <Tasks />
+              <TasksPage />
+            </Route>
+            <Route path='/members/add'>
+              <MemberAddPage />
             </Route>
             <Route path='/members/edit/:id'>
               <MemberEditPage />

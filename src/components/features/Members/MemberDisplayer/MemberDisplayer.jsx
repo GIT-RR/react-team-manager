@@ -6,6 +6,11 @@ const MemberDisplayer = ({ id }) => {
   const history = useHistory();
   const member = membersApi.getMember(id);
 
+  const handleDelete = () => {
+    membersApi.removeMember(member.id);
+    history.push('/members');
+  };
+
   return (
     <div>
       <h2>{member.name} Details</h2>
@@ -37,6 +42,7 @@ const MemberDisplayer = ({ id }) => {
         value='Edit member'
         onClick={() => history.push('/members/edit/' + member.id)}
       />
+      <input type='button' value='Delete member' onClick={handleDelete} />
     </div>
   );
 };
