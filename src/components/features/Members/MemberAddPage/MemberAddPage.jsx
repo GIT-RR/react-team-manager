@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import MemberForm from '../MemberForm/MemberForm';
-import { members } from '../../../../shared/fixtures/members';
 import { membersApi } from '../../../../shared/apis';
 
 const MemberAddPage = () => {

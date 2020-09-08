@@ -31,19 +31,21 @@ const Table = ({ headers, body, onRowClick }) => {
   };
 
   return (
-    <table>
-      <tr>
-        {headers.map((header) => (
-          <th key={header} onClick={() => handleSort(header)}>
-            {header}
-          </th>
-        ))}
-      </tr>
+    <div className='table-container'>
+      <table>
+        <tr>
+          {headers.map((header) => (
+            <th key={header} onClick={() => handleSort(header)}>
+              {header}
+            </th>
+          ))}
+        </tr>
 
-      {orderedBody().map((entry) => (
-        <tr onClick={() => onRowClick(entry[0])}>{getCells(entry)}</tr>
-      ))}
-    </table>
+        {orderedBody().map((entry) => (
+          <tr onClick={() => onRowClick(entry[0])}>{getCells(entry)}</tr>
+        ))}
+      </table>
+    </div>
   );
 };
 

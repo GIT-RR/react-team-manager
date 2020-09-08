@@ -40,7 +40,8 @@ const taskMapper = (task) => {
 };
 
 export const getAll = () => {
-  return tasks.map((t) => taskMapper(t));
+  // All except the Dones
+  return tasks.filter((task) => task.status !== 2).map((t) => taskMapper(t));
 };
 
 export const add = (task) => {
@@ -50,10 +51,17 @@ export const add = (task) => {
   });
 };
 
-// export const deleteTask = (planId) => {
-//   const index = tasks.findIndex(function (o) {
-//     return o.id === planId;
-//   });
+export const edit = (task) => {
+  const index = tasks.findIndex(function (o) {
+    return o.id === task.id;
+  });
+  tasks[index] = Object.assign(tasks[index], task);
+};
 
-//   tasks.splice(index, 1);
-// };
+export const remove = (id) => {
+  const index = tasks.findIndex(function (o) {
+    return o.id === id;
+  });
+
+  tasks.splice(index, 1);
+};

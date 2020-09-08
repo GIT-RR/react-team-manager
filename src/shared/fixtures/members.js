@@ -89,7 +89,6 @@ export const remove = (id) => {
 };
 
 export const update = (member) => {
-  debugger;
   const index = members.findIndex(function (o) {
     return o.id === member.id;
   });

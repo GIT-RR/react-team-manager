@@ -42,7 +42,7 @@ const MemberDisplayer = ({ id }) => {
         value='Edit member'
         onClick={() => history.push('/members/edit/' + member.id)}
       />
-      <input type='button' value='Delete member' onClick={handleDelete} />
+      <button onClick={handleDelete}>Delete member</button>
     </div>
   );
 };

@@ -81,7 +81,7 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
             {genders.map((gen) => (
               <div key={gen.value}>
                 <input type='radio' name='gender' value={gen.value} ref={register} />
-                <label for={gen.value}>{gen.name}</label>
+                <span for={gen.value}>{gen.name}</span>
               </div>
             ))}
           </td>
@@ -89,10 +89,10 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
             <div className='error'>{errors.gender && errors.gender.message}</div>
           </td>
         </tr>
-        <br></br>
-        <input type='submit' value='Ok' />
-        <input type='button' value='Cancel' onClick={onCancel} />
       </table>
+      <br></br>
+      <button type='submit'>Ok</button>
+      <button onClick={onCancel}>Cancel</button>
     </form>
   );
 };
