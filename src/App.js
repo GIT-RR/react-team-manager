@@ -1,10 +1,7 @@
 import React from 'react';
 import './App.css';
-import MembersPage from './components/features/Members/MembersPage/MembersPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import MemberEditPage from './components/features/Members/MemberEditPage/MemberEditPage';
-import MemberAddPage from './components/features/Members/MemberAddPage/MemberAddPage';
-import TasksPage from './components/features/Tasks/TasksPage/TasksPage';
+import { TasksPage, MemberAddPage, MembersPage, MemberEditPage } from './components/pages';
 
 function App() {
   return (

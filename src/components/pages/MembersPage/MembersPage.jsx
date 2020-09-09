@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './MembersPage.css';
-import MemberDisplayer from '../MemberDisplayer/MemberDisplayer';
-import { membersApi } from '../../../../shared/apis';
+import { membersApi } from '../../../shared/apis';
 import { useHistory } from 'react-router-dom';
+import { MemberDisplayer } from '../../features/Members';
 
 const Members = () => {
   const history = useHistory();

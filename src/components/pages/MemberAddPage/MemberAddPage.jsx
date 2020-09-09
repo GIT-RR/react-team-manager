@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import MemberForm from '../MemberForm/MemberForm';
-import { membersApi } from '../../../../shared/apis';
+import MemberForm from '../../features/Members/MemberForm/MemberForm';
+import { membersApi } from '../../../shared/apis';
 
 const MemberAddPage = () => {
   const history = useHistory();

@@ -1,7 +1,7 @@
 import React from 'react';
-import MemberForm from '../MemberForm/MemberForm';
+import { MemberDisplayer } from '../../features/Members';
 import { useHistory, useParams } from 'react-router-dom';
-import { membersApi } from '../../../../shared/apis';
+import { membersApi } from '../../../shared/apis';
 
 const MemberEditPage = () => {
   const history = useHistory();
@@ -21,7 +21,7 @@ const MemberEditPage = () => {
   return (
     <>
       <h2>Editing {member.name}</h2>
-      <MemberForm member={member} onSuccess={handleEdit} onCancel={handleCancel} />
+      <MemberDisplayer member={member} onSuccess={handleEdit} onCancel={handleCancel} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Table from '../../../shared/Table/Table';
-import { tasksApi } from '../../../../shared/apis';
-import TaskForm from '../TaskForm/TaskForm';
+import Table from '../../shared/Table/Table';
+import { tasksApi } from '../../../shared/apis';
+import { TaskForm } from '../../features/Tasks';
 
 const headers = ['Area', 'Description', 'Limit date', 'Status'];
 
