@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './MembersPage.css';
 import { membersApi } from '../../../shared/apis';
 import { useHistory } from 'react-router-dom';
-import { MemberDisplayer } from '../../features/Members';
+import { MemberDisplayer, MemberList } from '../../features/Members';
 
 const Members = () => {
   const history = useHistory();
@@ -25,13 +25,7 @@ const Members = () => {
       </div>
       <div className='member-container'>
         <div className='member-column'>
-          <ul className='members'>
-            {members.map((member) => (
-              <li key={member.id} onClick={() => handleSelectMember(member)}>
-                <span className='badge'>{member.id}</span> {member.name}
-              </li>
-            ))}
-          </ul>
+          <MemberList members={members} onSelectMember={handleSelectMember} />
         </div>
         <div className='member-column'>
           {selectedMember && <MemberDisplayer id={selectedMember.id} />}

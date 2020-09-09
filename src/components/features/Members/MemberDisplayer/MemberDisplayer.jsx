@@ -37,11 +37,7 @@ const MemberDisplayer = ({ id }) => {
       </table>
 
       <br></br>
-      <input
-        type='button'
-        value='Edit member'
-        onClick={() => history.push('/members/edit/' + member.id)}
-      />
+      <button onClick={() => history.push('/members/edit/' + member.id)}>Edit member</button>
       <button onClick={handleDelete}>Delete member</button>
     </div>
   );
