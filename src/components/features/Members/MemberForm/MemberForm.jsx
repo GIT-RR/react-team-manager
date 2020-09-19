@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { genders, roles } from '../../../../shared/fixtures/commons';
 import { yupResolver } from '@hookform/resolvers';
+import ErrorMessage from '../../../shared/ErrorMessage/ErrorMessage';
 
 const defaultValues = {
   id: null,
@@ -27,6 +28,7 @@ const resolver = yupResolver(
 
 const MemberForm = ({ member = null, onSuccess, onCancel }) => {
   const { handleSubmit, register, errors } = useForm({
+    mode: 'onBlur',
     defaultValues: member || defaultValues,
     resolver: resolver,
   });
@@ -42,7 +44,7 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
           <td>
             <input type='text' name='email' ref={register} />
           </td>
-          <div className='error'>{errors.email && errors.email.message}</div>
+          <ErrorMessage>{errors.email && errors.email.message}</ErrorMessage>
         </tr>
         <tr>
           <td>
@@ -52,7 +54,7 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
             <input type='text' name='name' ref={register} />
           </td>
           <td>
-            <div className='error'>{errors.name && errors.name.message}</div>
+            <ErrorMessage>{errors.name && errors.name.message}</ErrorMessage>
           </td>
         </tr>
         <tr>
@@ -70,7 +72,7 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
             </select>
           </td>
           <td>
-            <div className='error'>{errors.role && errors.role.message}</div>
+            <ErrorMessage>{errors.role && errors.role.message}</ErrorMessage>
           </td>
         </tr>
         <tr>
@@ -86,7 +88,7 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
             ))}
           </td>
           <td>
-            <div className='error'>{errors.gender && errors.gender.message}</div>
+            <ErrorMessage>{errors.gender && errors.gender.message}</ErrorMessage>
           </td>
         </tr>
       </table>

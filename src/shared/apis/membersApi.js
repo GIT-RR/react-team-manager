@@ -5,6 +5,7 @@ export const getMembers = () => {
 };
 
 export const getMember = (id) => {
+  debugger;
   return membersBE.get(id);
 };
 
