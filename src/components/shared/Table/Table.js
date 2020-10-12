@@ -8,7 +8,6 @@ const Table = ({ headers, body, onRowClick }) => {
     const index = headers.findIndex(function (o) {
       return o === header;
     });
-    console.log(index);
     setOrderIndex(index);
   };
 

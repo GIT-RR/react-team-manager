@@ -1,22 +1,56 @@
-import { membersBE } from '../fixtures';
+import { axios } from './request';
 
 export const getMembers = () => {
-  return membersBE.getAll();
+  return axios
+    .get('/members')
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const getMember = (id) => {
-  debugger;
-  return membersBE.get(id);
+  return axios
+    .get('/members/' + id)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const addMember = (member) => {
-  membersBE.add(member);
+  return axios
+    .post('/members/add', member)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const updateMember = (member) => {
-  membersBE.update(member);
+  return axios
+    .post('/members/update', member)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
-export const removeMember = (memberId) => {
-  membersBE.remove(memberId);
+export const removeMember = (id) => {
+  return axios
+    .post('/members/delete/' + id)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MemberForm } from '../../features/Members';
 import { useHistory, useParams } from 'react-router-dom';
 import { membersApi } from '../../../shared/apis';
@@ -6,10 +6,14 @@ import { membersApi } from '../../../shared/apis';
 const MemberEditPage = () => {
   const history = useHistory();
   const { id } = useParams();
-  const member = membersApi.getMember(+id);
+  const [member, setMember] = useState(null);
 
-  const handleEdit = (memberData) => {
-    membersApi.updateMember(memberData);
+  useEffect(() => {
+    membersApi.getMember(id).then((res) => setMember(res));
+  }, [id]);
+
+  const handleEdit = async (memberData) => {
+    await membersApi.updateMember(memberData);
     history.push('/members');
   };
   const handleCancel = () => {
@@ -18,7 +22,7 @@ const MemberEditPage = () => {
 
   return (
     <>
-      <h2>Editing {member.name}</h2>
+      <h2>Editing {member?.name}</h2>
       {member && <MemberForm member={member} onSuccess={handleEdit} onCancel={handleCancel} />}
     </>
   );

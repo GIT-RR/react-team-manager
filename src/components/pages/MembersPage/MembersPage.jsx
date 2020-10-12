@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MembersPage.css';
 import { membersApi } from '../../../shared/apis';
 import { useHistory } from 'react-router-dom';
 import { MemberDisplayer, MemberList } from '../../features/Members';
 
-const Members = () => {
+const MembersPage = () => {
   const history = useHistory();
   const [selectedMember, setSelectedMember] = useState(null);
-  const members = membersApi.getMembers();
+  const [members, setMembers] = useState(null);
+
+  useEffect(() => {
+    const getMembers = async () => {
+      const members = await membersApi.getMembers();
+      setMembers(members);
+    };
+    getMembers();
+  }, []);
 
   const handleSelectMember = (member) => {
-    setSelectedMember(JSON.stringify(selectedMember) === JSON.stringify(member) ? null : member);
+    setSelectedMember(selectedMember === member ? null : member);
   };
 
   const handleAddMember = () => {
@@ -35,4 +43,4 @@ const Members = () => {
   );
 };
 
-export default Members;
+export default MembersPage;

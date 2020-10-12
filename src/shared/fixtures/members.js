@@ -72,7 +72,6 @@ const memberMapper = (member) => {
 };
 
 export const get = (id) => {
-  debugger;
   return memberMapper(members.find((x) => x.id === id));
 };
 

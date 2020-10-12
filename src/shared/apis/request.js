@@ -1,47 +1,40 @@
-import Axios, { AxiosResponse } from 'axios';
 import * as membersBE from '../fixtures/members';
 
-export const httpClient = Axios.create({
-  baseURL: 'http://localhost:3000',
+export let axios = require('axios');
+var MockAdapter = require('axios-mock-adapter');
+
+// This sets the mock adapter on the default instance
+var mock = new MockAdapter(axios);
+
+mock.onGet('/members').reply(function (request) {
+  return [200, membersBE.getAll()];
 });
 
-httpClient.interceptors.request.use((config) => {
-  return config;
+mock.onGet(/\/members\/\d+/).reply(function (request) {
+  const splitted = request.url.split('/');
+  const id = +splitted[splitted.length - 1];
+
+  return [200, membersBE.get(id)];
 });
 
-httpClient.interceptors.response.use(
-  (response) => {
-    return parseBody(response);
-  },
-  (error) => {
-    console.warn('Error status', error.response.status);
-    // return Promise.reject(error)
-    if (error.response) {
-      return parseError(error.response.data);
-    } else {
-      return Promise.reject(error);
-    }
-  }
-);
+mock.onPost('/members/add').reply(function (request) {
+  const member = JSON.parse(request.data);
+  membersBE.add(member);
 
-function parseBody(response) {
-  //  if (response.status === 200 && response.data.status.code === 200) { // - if use custom status code
-  if (response.status === 200) {
-    return response.data.result;
-  } else {
-    return this.parseError(response.data.messages);
-  }
-}
+  return [200];
+});
 
-function parseError(messages) {
-  // error
-  if (messages) {
-    if (messages instanceof Array) {
-      return Promise.reject({ messages: messages });
-    } else {
-      return Promise.reject({ messages: [messages] });
-    }
-  } else {
-    return Promise.reject({ messages: ['エラーが発生しました'] });
-  }
-}
+mock.onPost('/members/update').reply(function (request) {
+  const member = JSON.parse(request.data);
+  membersBE.update(member);
+
+  return [200];
+});
+
+mock.onPost(/\/members\/delete\/\d+/).reply(function (request) {
+  console.log('delete');
+  const splitted = request.url.split('/');
+  const id = +splitted[splitted.length - 1];
+
+  return [200, membersBE.remove(id)];
+});

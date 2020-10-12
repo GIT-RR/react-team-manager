@@ -6,7 +6,6 @@ import { TaskForm } from '../../features/Tasks';
 const headers = ['Area', 'Description', 'Limit date', 'Status'];
 
 const taskTableRowMapper = (task) => {
-  debugger;
   return [task.id, task.roleDesc, task.description, task.limitDate.toDateString(), task.statusDesc];
 };
 

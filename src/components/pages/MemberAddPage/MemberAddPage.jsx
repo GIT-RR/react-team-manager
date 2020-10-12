@@ -6,8 +6,8 @@ import { membersApi } from '../../../shared/apis';
 const MemberAddPage = () => {
   const history = useHistory();
 
-  const handleAdd = (member) => {
-    membersApi.addMember(member);
+  const handleAdd = async (member) => {
+    await membersApi.addMember(member);
     history.push('/members');
   };
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TasksPage, MemberAddPage, MembersPage, MemberEditPage } from './components/pages';
 
 const Routes = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
         <Route path='/tasks'>
           <TasksPage />
@@ -20,7 +20,7 @@ const Routes = () => {
         </Route>
         <Redirect from='/' to='/members' />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 };
 
