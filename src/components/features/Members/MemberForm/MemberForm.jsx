@@ -37,64 +37,62 @@ const MemberForm = ({ member = null, onSuccess, onCancel }) => {
     <form onSubmit={handleSubmit(onSuccess)}>
       <input type='hidden' name='id' ref={register} />
       <table>
-        <tbody>
-          <tr>
-            <td>
-              <label>Email</label>
-            </td>
-            <td>
-              <input type='text' name='email' ref={register} />
-            </td>
-            <ErrorMessage>{errors.email && errors.email.message}</ErrorMessage>
-          </tr>
-          <tr>
-            <td>
-              <label>Name</label>
-            </td>
-            <td>
-              <input type='text' name='name' ref={register} />
-            </td>
-            <td>
-              <ErrorMessage>{errors.name && errors.name.message}</ErrorMessage>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Role</label>
-            </td>
-            <td>
-              <select ref={register} name={'role'}>
-                <option value=''></option>
-                {roles.map((role) => (
-                  <option key={role.value} value={role.value}>
-                    {role.name}
-                  </option>
-                ))}
-              </select>
-            </td>
-            <td>
-              <ErrorMessage>{errors.role && errors.role.message}</ErrorMessage>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Gender</label>
-            </td>
-            <td>
-              {genders.map((gen) => (
-                <React.Fragment key={gen.value}>
-                  <input type='radio' name='gender' value={gen.value} ref={register} />
-                  <span htmlFor={gen.value}>{gen.name}</span>
-                </React.Fragment>
+        <tr>
+          <td>
+            <label>Email</label>
+          </td>
+          <td>
+            <input type='text' name='email' ref={register} />
+          </td>
+          <ErrorMessage>{errors.email && errors.email.message}</ErrorMessage>
+        </tr>
+        <tr>
+          <td>
+            <label>Name</label>
+          </td>
+          <td>
+            <input type='text' name='name' ref={register} />
+          </td>
+          <td>
+            <ErrorMessage>{errors.name && errors.name.message}</ErrorMessage>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Role</label>
+          </td>
+          <td>
+            <select ref={register} name={'role'}>
+              <option value=''></option>
+              {roles.map((role) => (
+                <option key={role.value} value={role.value}>
+                  {role.name}
+                </option>
               ))}
-            </td>
-            <td>
-              <ErrorMessage>{errors.gender && errors.gender.message}</ErrorMessage>
-            </td>
-          </tr>
-        </tbody>
+            </select>
+          </td>
+          <td>
+            <ErrorMessage>{errors.role && errors.role.message}</ErrorMessage>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Gender</label>
+          </td>
+          <td>
+            {genders.map((gen) => (
+              <div key={gen.value}>
+                <input type='radio' name='gender' value={gen.value} ref={register} />
+                <span for={gen.value}>{gen.name}</span>
+              </div>
+            ))}
+          </td>
+          <td>
+            <ErrorMessage>{errors.gender && errors.gender.message}</ErrorMessage>
+          </td>
+        </tr>
       </table>
-
+      <br></br>
       <button type='submit'>Ok</button>
       <button onClick={onCancel}>Cancel</button>
     </form>

@@ -8,7 +8,6 @@ const defaultValues = {
   id: null,
   role: null,
   description: null,
-  limitDate: null,
   status: 0,
 };
 
@@ -20,7 +19,6 @@ const resolver = yupResolver(
       .nullable(),
     role: yup.string().required('Required !'),
     description: yup.string().required('Required !'),
-    limitDate: yup.date().required('Required !'),
     status: yup.number().required('Required !'),
   })
 );
@@ -62,17 +60,6 @@ const TaskForm = ({ task = null, onSuccess, onCancel }) => {
           </td>
           <td>
             <div className='error'>{errors.description && errors.description.message}</div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label>Limit date</label>
-          </td>
-          <td>
-            <input type='date' name='limitDate' ref={register} />
-          </td>
-          <td>
-            <div className='error'>{errors.limitDate && errors.limitDate.message}</div>
           </td>
         </tr>
         <tr>

@@ -1,17 +1,34 @@
-import { tasksBE } from '../fixtures';
+import { axios } from './request';
 
 export const getTasks = () => {
-  return tasksBE.getAll();
+  return axios
+    .get('/tasks')
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const addTask = (task) => {
-  tasksBE.add(task);
+  return axios
+    .post('/tasks/add', task)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const editTask = (task) => {
-  tasksBE.edit(task);
-};
-
-export const removeTask = (id) => {
-  tasksBE.remove(id);
+  return axios
+    .post('/tasks/update', task)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => {
+      throw e;
+    });
 };

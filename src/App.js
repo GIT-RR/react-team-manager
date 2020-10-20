@@ -1,17 +1,20 @@
 import React from 'react';
 import './App.css';
 import Routes from './Routes';
+import { Link, BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <header>Team Manager</header>
       <div className='app-container'>
-        <nav>
-          <a href='/tasks'>Tasks</a>
-          <a href='/members'>Team</a>
-        </nav>
-        <Routes />
+        <BrowserRouter>
+          <nav>
+            <Link to='/tasks'>Tasks</Link>
+            <Link to='/members'>Team</Link>
+          </nav>
+          <Routes />
+        </BrowserRouter>
       </div>
     </>
   );

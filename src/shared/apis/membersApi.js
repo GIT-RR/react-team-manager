@@ -1,4 +1,8 @@
 import { axios } from './request';
+import { Subject } from 'rxjs';
+
+const _reloadMembers = new Subject();
+export const reloadMembers$ = _reloadMembers.asObservable();
 
 export const getMembers = () => {
   return axios
@@ -48,6 +52,7 @@ export const removeMember = (id) => {
   return axios
     .post('/members/delete/' + id)
     .then((res) => {
+      _reloadMembers.next();
       return res.data;
     })
     .catch((e) => {

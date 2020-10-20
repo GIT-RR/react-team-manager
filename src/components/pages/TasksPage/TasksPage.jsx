@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '../../shared/Table/Table';
 import { tasksApi } from '../../../shared/apis';
 import { TaskForm } from '../../features/Tasks';
 
-const headers = ['Area', 'Description', 'Limit date', 'Status'];
+const headers = ['Area', 'Description', 'Status'];
 
 const taskTableRowMapper = (task) => {
-  return [task.id, task.roleDesc, task.description, task.limitDate.toDateString(), task.statusDesc];
+  return [task.id, task.roleDesc, task.description, task.statusDesc];
 };
 
 const TasksPage = () => {
-  const tasks = tasksApi.getTasks();
+  const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [addTask, setAddTask] = useState(null);
+
+  const getTasks = async () => {
+    const taskRes = await tasksApi.getTasks();
+    setTasks(taskRes);
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   const handleSelectTask = (id) => {
     if (selectedTask && selectedTask.id === id) {
@@ -25,16 +34,13 @@ const TasksPage = () => {
   const handleAddTask = (task) => {
     tasksApi.addTask(task);
     setAddTask(null);
+    getTasks();
   };
 
   const handleEditTask = (task) => {
     tasksApi.editTask(task);
     setSelectedTask(null);
-  };
-
-  const handleDeleteTask = (id) => {
-    tasksApi.removeTask(id);
-    setSelectedTask(null);
+    getTasks();
   };
 
   return (
@@ -55,7 +61,6 @@ const TasksPage = () => {
               setSelectedTask(null);
             }}
           />
-          <button value='Delete' onClick={handleDeleteTask} />
         </>
       )}
       {addTask && (

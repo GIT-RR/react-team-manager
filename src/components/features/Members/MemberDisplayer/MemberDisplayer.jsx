@@ -25,43 +25,39 @@ const MemberDisplayer = ({ id }) => {
     return;
   };
 
-  if (member) {
-    return (
-      <div>
-        <h2>{member.name} Details</h2>
+  return (
+    <div>
+      <h2>{member?.name} Details</h2>
 
-        <table>
-          <thead>
-            <tr>
-              <td>
-                <label>Email:</label>
-              </td>
-              <td>{member.email}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <label>Role:</label>
-              </td>
-              <td>{member.roleDesc}</td>
-            </tr>
-            <tr>
-              <td>
-                <label>Gender:</label>
-              </td>
-              <td>{member.genderDesc}</td>
-            </tr>
-          </tbody>
-        </table>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <label>Email:</label>
+            </td>
+            <td>{member?.email}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <label>Role:</label>
+            </td>
+            <td>{member?.roleDesc}</td>
+          </tr>
+          <tr>
+            <td>
+              <label>Gender:</label>
+            </td>
+            <td>{member?.genderDesc}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <button onClick={handleEdit}>Edit member</button>
-        <button onClick={handleDelete}>Delete member</button>
-      </div>
-    );
-  }
-
-  return null;
+      <button onClick={handleEdit}>Edit member</button>
+      <button onClick={handleDelete}>Delete member</button>
+    </div>
+  );
 };
 
 export default MemberDisplayer;

@@ -9,7 +9,11 @@ const MemberEditPage = () => {
   const [member, setMember] = useState(null);
 
   useEffect(() => {
-    membersApi.getMember(id).then((res) => setMember(res));
+    const getMember = async () => {
+      const member = await membersApi.getMember(id);
+      setMember(member);
+    };
+    getMember();
   }, [id]);
 
   const handleEdit = async (memberData) => {

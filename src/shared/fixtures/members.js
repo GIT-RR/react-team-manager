@@ -87,7 +87,7 @@ export const remove = (id) => {
   members[index].isActive = false;
 };
 
-export const update = (member) => {
+export const edit = (member) => {
   const index = members.findIndex(function (o) {
     return o.id === member.id;
   });

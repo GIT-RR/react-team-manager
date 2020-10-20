@@ -7,14 +7,24 @@ import { MemberDisplayer, MemberList } from '../../features/Members';
 const MembersPage = () => {
   const history = useHistory();
   const [selectedMember, setSelectedMember] = useState(null);
-  const [members, setMembers] = useState(null);
+  const [members, setMembers] = useState([]);
+
+  const getMembers = async () => {
+    const members = await membersApi.getMembers();
+    setMembers(members);
+  };
 
   useEffect(() => {
-    const getMembers = async () => {
-      const members = await membersApi.getMembers();
-      setMembers(members);
-    };
     getMembers();
+
+    let subscription = membersApi.reloadMembers$.subscribe(() => {
+      getMembers();
+      setSelectedMember(null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleSelectMember = (member) => {
