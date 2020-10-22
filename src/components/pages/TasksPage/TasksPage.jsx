@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Table from '../../shared/Table/Table';
 import { tasksApi } from '../../../shared/apis';
 import { TaskForm } from '../../features/Tasks';
+import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 const headers = ['Area', 'Description', 'Status'];
 
@@ -44,7 +45,7 @@ const TasksPage = () => {
   };
 
   return (
-    <>
+    <AuthLayout>
       <h3>Team Tasks</h3>
       <button onClick={() => setAddTask(!addTask)}>Add a new task</button>
       <Table
@@ -71,7 +72,7 @@ const TasksPage = () => {
           }}
         />
       )}
-    </>
+    </AuthLayout>
   );
 };
 

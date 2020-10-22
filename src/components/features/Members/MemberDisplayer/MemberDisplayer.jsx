@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { membersApi } from '../../../../shared/apis';
 import { useHistory } from 'react-router-dom';
 
-const MemberDisplayer = ({ id }) => {
+const MemberDisplayer = ({ id, onDelete }) => {
   const history = useHistory();
   const [member, setMember] = useState(null);
 
@@ -16,12 +16,6 @@ const MemberDisplayer = ({ id }) => {
 
   const handleEdit = () => {
     history.push('/members/edit/' + id);
-    return;
-  };
-
-  const handleDelete = async () => {
-    await membersApi.removeMember(member.id);
-    history.push('/members');
     return;
   };
 
@@ -55,7 +49,7 @@ const MemberDisplayer = ({ id }) => {
       </table>
 
       <button onClick={handleEdit}>Edit member</button>
-      <button onClick={handleDelete}>Delete member</button>
+      <button onClick={() => onDelete(id)}>Delete member</button>
     </div>
   );
 };

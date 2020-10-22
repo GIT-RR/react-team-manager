@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import MemberForm from '../../features/Members/MemberForm/MemberForm';
 import { membersApi } from '../../../shared/apis';
+import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 const MemberAddPage = () => {
   const history = useHistory();
@@ -16,10 +17,10 @@ const MemberAddPage = () => {
   };
 
   return (
-    <>
+    <AuthLayout>
       <h2>Adding a new member</h2>
       <MemberForm onSuccess={handleAdd} onCancel={handleCancel} />
-    </>
+    </AuthLayout>
   );
 };
 

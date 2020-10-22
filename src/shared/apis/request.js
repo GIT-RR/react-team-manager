@@ -1,5 +1,6 @@
 import * as membersBE from '../fixtures/members';
 import * as tasksBE from '../fixtures/tasks';
+import { authBE } from '../fixtures';
 
 export let axios = require('axios');
 var MockAdapter = require('axios-mock-adapter');
@@ -27,6 +28,16 @@ mock.onPost('/members/add').reply(function (request) {
   membersBE.add(member);
 
   return [200];
+});
+
+mock.onPost('/login').reply(function (request) {
+  const requestData = JSON.parse(request.data);
+
+  const login = authBE.login(requestData.email, requestData.password);
+  if (login) {
+    return [200, login];
+  }
+  throw new Error('Invalid Credentials');
 });
 
 mock.onPost('/tasks/add').reply(function (request) {

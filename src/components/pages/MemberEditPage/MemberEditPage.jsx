@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MemberForm } from '../../features/Members';
 import { useHistory, useParams } from 'react-router-dom';
 import { membersApi } from '../../../shared/apis';
+import AuthLayout from '../../layouts/AuthLayout/AuthLayout';
 
 const MemberEditPage = () => {
   const history = useHistory();
@@ -25,10 +26,10 @@ const MemberEditPage = () => {
   };
 
   return (
-    <>
+    <AuthLayout>
       <h2>Editing {member?.name}</h2>
       {member && <MemberForm member={member} onSuccess={handleEdit} onCancel={handleCancel} />}
-    </>
+    </AuthLayout>
   );
 };
 
