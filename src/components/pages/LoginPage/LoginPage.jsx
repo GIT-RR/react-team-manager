@@ -6,6 +6,7 @@ import NotAuthLayout from '../../layouts/NotAuthLayout/NotAuthLayout';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
+import './LoginPage.css';
 
 const defaultValues = {
   email: null,
@@ -43,12 +44,12 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit(handleLogin)}>
         <label>Email:</label>
         <br />
-        <input type='text' ref={register} name='email' />
+        <input type='text' ref={register} name='email' className='login-input' />
         <div className='error'>{errors.email && errors.email.message}</div>
         <br />
         <label>Password:</label>
         <br />
-        <input type='password' ref={register} name='password' />
+        <input type='password' ref={register} name='password' className='login-input' />
         <div className='error'>{errors.password && errors.password.message}</div>
         <br />
         <button type='submit'>Login</button>

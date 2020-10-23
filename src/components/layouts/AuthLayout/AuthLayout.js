@@ -19,13 +19,11 @@ const AuthLayout = ({ children }) => {
   return (
     <>
       {isLoading && <Loading />}
-      <header className='auth-header'>
-        Team Manager - {authData.name}
-        <input type='button' value='Logout' onClick={handleLogOut} />
-      </header>
+      <header className='auth-header'>Team Manager - {authData.name}</header>
       <nav>
         <Link to='/tasks'>Tasks</Link>
         <Link to='/members'>Team</Link>
+        <button onClick={handleLogOut}>Logout</button>
       </nav>
       <div className='app-container'>{children}</div>
     </>
