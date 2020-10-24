@@ -1,25 +1,26 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../../shared/contexts/authContext';
+import React, { useState } from 'react';
 import Loading from '../../shared/Loading/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './AuthLayout.css';
 
 const AuthLayout = ({ children }) => {
-  const { authData, setAuthData } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const authData = JSON.parse(localStorage.getItem('authData'));
+  const history = useHistory();
 
   const handleLogOut = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setAuthData(null);
+      localStorage.clear();
       setIsLoading(false);
+      history.push('/');
     }, 3000);
   };
 
   return (
     <>
       {isLoading && <Loading />}
-      <header className='auth-header'>Team Manager - {authData.name}</header>
+      <header className='auth-header'>Team Manager - {authData?.name}</header>
       <nav>
         <Link to='/tasks'>Tasks</Link>
         <Link to='/members'>Team</Link>

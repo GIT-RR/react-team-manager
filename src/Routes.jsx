@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { TasksPage, MemberAddPage, MembersPage, MemberEditPage } from './components/pages';
 import LoginPage from './components/pages/LoginPage/LoginPage';
-import { AuthContext } from './shared/contexts/authContext';
 import { BrowserRouter } from 'react-router-dom';
 
 const Routes = () => {
@@ -14,13 +13,14 @@ const Routes = () => {
         <PrivateRoute path='/members/add' component={MemberAddPage} />
         <PrivateRoute path='/members' component={MembersPage} />
         <PrivateRoute path='/tasks' component={TasksPage} />
+        <Redirect from='/' to='/members' />
       </Switch>
     </BrowserRouter>
   );
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { authData } = useContext(AuthContext);
+  const authData = localStorage.getItem('authData');
   return (
     <Route
       {...rest}

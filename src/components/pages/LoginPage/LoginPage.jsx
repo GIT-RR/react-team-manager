@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../shared/contexts/authContext';
+import React from 'react';
 import { authApi } from '../../../shared/apis';
 import { useHistory } from 'react-router-dom';
 import NotAuthLayout from '../../layouts/NotAuthLayout/NotAuthLayout';
@@ -22,7 +21,6 @@ const resolver = yupResolver(
 
 const LoginPage = () => {
   const history = useHistory();
-  const { setAuthData } = useContext(AuthContext);
   const { handleSubmit, errors, register } = useForm({
     defaultValues,
     resolver,
@@ -31,7 +29,7 @@ const LoginPage = () => {
   const handleLogin = async (formData) => {
     try {
       const loginData = await authApi.login(formData.email, formData.password);
-      setAuthData(loginData);
+      localStorage.setItem('authData', JSON.stringify(loginData));
       history.push('/members');
     } catch (ex) {
       alert(ex.message);
