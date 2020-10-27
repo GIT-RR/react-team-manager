@@ -39,7 +39,6 @@ const Table = ({ headers, body, onRowClick }) => {
             </th>
           ))}
         </tr>
-
         {orderedBody().map((entry) => (
           <tr onClick={() => onRowClick(entry[0])}>{getCells(entry)}</tr>
         ))}
