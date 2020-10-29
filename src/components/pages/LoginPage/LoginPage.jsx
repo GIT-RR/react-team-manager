@@ -42,15 +42,29 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit(handleLogin)}>
         <label>Email:</label>
         <br />
-        <input type='text' ref={register} name='email' className='login-input' />
+        <input
+          type='text'
+          ref={register}
+          name='email'
+          className='login-input'
+          data-testid='email'
+        />
         <div className='error'>{errors.email && errors.email.message}</div>
         <br />
         <label>Password:</label>
         <br />
-        <input type='password' ref={register} name='password' className='login-input' />
+        <input
+          type='password'
+          ref={register}
+          name='password'
+          className='login-input'
+          data-testid='password'
+        />
         <div className='error'>{errors.password && errors.password.message}</div>
         <br />
-        <button type='submit'>Login</button>
+        <button type='submit' data-testid='login'>
+          Login
+        </button>
       </form>
     </NotAuthLayout>
   );
